@@ -11,17 +11,13 @@ CREATE TABLE users (
 
 CREATE TABLE secrets (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-    title VARCHAR NOT NULL
-    description VARCHAR NOT NULL
-    created_at TIMESTAMP NOT NULL
-)
+    title VARCHAR NOT NULL,
+    description VARCHAR NOT NULL,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
 
-INSERT INTO secrets (
-    title,
-    description,
-)
-VALUES
-('Sacramento','CA', )
-('Salem','OR')
-('Olympia','WA')
-('Carson City','NV')
+INSERT INTO secrets (title, description) VALUES
+    ('Sacramento','CA'),
+    ('Salem','OR'),
+    ('Olympia','WA'),
+    ('Carson City','NV');
