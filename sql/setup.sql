@@ -13,16 +13,15 @@ CREATE TABLE secrets (
     id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
     title VARCHAR NOT NULL
     description VARCHAR NOT NULL
-    created_at TIMESTAMP
+    created_at TIMESTAMP NOT NULL
 )
 
 INSERT INTO secrets (
     title,
     description,
-    created_at
 )
 VALUES
-('Sacramento','CA')
+('Sacramento','CA', )
 ('Salem','OR')
 ('Olympia','WA')
 ('Carson City','NV')
