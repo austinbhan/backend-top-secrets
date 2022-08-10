@@ -8,7 +8,7 @@ describe('secret-routes', () => {
     return setup(pool);
   });
 
-  it('Should return list of secrets', async () => {
+  it('#GET Should return list of secrets', async () => {
     const res = await request(app).get('/secrets');
     const expected = [
       { id: '1', title: 'Sacramento', description: 'CA' },

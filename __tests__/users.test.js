@@ -2,10 +2,11 @@ const pool = require('../lib/utils/pool');
 const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
-// const UserService = require('../lib/services/UserService');
+const UserService = require('../lib/services/UserService');
+const { signIn } = require('../lib/services/UserService');
 
 const mockUser = {
-  email: 'Test Email',
+  email: 'test@example.com',
   password: '12345'
 };
 
@@ -27,7 +28,7 @@ describe('backend-express-template routes', () => {
     return setup(pool);
   });
 
-  it('creates a new user', async () => {
+  it('#POST creates a new user', async () => {
     const res = await request(app).post('/api/v1/users').send(mockUser);
     const { email } = mockUser;
 
@@ -35,6 +36,18 @@ describe('backend-express-template routes', () => {
       id: expect.any(String),
       email,
     });
+  });
+
+  it('signs in an existing user', async () => {
+    const agent = request.agent(app);
+    await agent.post('/api/v1/users').send(mockUser);
+    const { email, password } = mockUser;
+    const user = await signIn({ email, password });
+    const res = await agent.post('/api/v1/users/session').send({
+      email,
+      password
+    });
+    expect(res.body).toEqual({ message: 'Signed in successfully!', user });
   });
 
 });
