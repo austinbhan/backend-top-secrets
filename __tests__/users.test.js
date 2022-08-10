@@ -38,7 +38,7 @@ describe('backend-express-template routes', () => {
     });
   });
 
-  it('signs in an existing user', async () => {
+  it('#POST signs in an existing user', async () => {
     const agent = request.agent(app);
     await agent.post('/api/v1/users').send(mockUser);
     const { email, password } = mockUser;
@@ -49,5 +49,12 @@ describe('backend-express-template routes', () => {
     });
     expect(res.body).toEqual({ message: 'Signed in successfully!', user });
   });
+  // it('signs in an existing user', async () => {
+  //   await request(app).post('/api/v1/users').send(mockUser);
+  //   const res = await request(app)
+  //     .post('/api/v1/users/sessions')
+  //     .send({ email: 'test@example.com', password: '12345' });
+  //   expect(res.status).toEqual(200);
+  // });
 
 });
